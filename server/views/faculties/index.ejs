@@ -1,0 +1,79 @@
+<% include ../partials/header.ejs %>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-10">
+        <h3>Faculty Information</h3>
+        <a href="/faculties/add" class="btn btn-primary">
+          <i class="fa fa-plus">
+            Add
+          </i>
+        </a>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Faculty ID</th>
+                <th class="text-center">Faculty Name</th>
+                <th class="text-center">Department</th>
+                <th class="text-center">Subject</th>
+                <th class="text-center"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Template Row -->
+              <% for (let count=0; count < faculties.length; count++) { %>
+                <tr>
+                  <td>
+                    <%= faculties[count].Facultyid %>
+                  </td>
+                  <td class="text-center">
+                    <%= faculties[count].Facultyname %>
+                  </td>
+                  <td class="text-center">
+                    <%= faculties[count].Department %>
+                  </td>
+                  <td class="text-center">
+                    <%= faculties[count].Subject %>
+                  </td>
+
+                  <td class="text-center">
+                    <a href="/faculties/<%= faculties[count].Facultyid %>" class="btn btn-warning">
+                      <i class="fa fa-pencil-square-o">
+                        Edit
+                      </i>
+                    </a>
+                  </td>
+                </tr>
+                <% } %>
+            </tbody>
+          </table>
+        </div>
+        <a type="button" class="btn btn-sm btn-info " data-toggle="modal" data-target="#modal">
+          <i class="fa fa-trash"></i>
+          Delete
+        </a>
+        <div class="modal fade" id="modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form method="get" action="/faculties/delete">
+                <div class="modal-body">
+                  <label for="name">faculty name</label>
+                  <input name="name" type="text" required>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-warning" id="createFileSureBut">Confirm</button>
+                  <a type="button" class="btn btn-primary" id="createFileSureBut" data-dismiss="modal">Cancel</a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-offset-1 col-md-10 text-center">
+            <ul class="pagination pagination-lg pager" id="myPager"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% include ../partials/footer.ejs %>
